@@ -1,0 +1,35 @@
+<% if current_user.admin? %>
+  <h2>User</h2>
+<% else %>
+  <h2>Account</h2>
+<% end %>
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th scope="row">Email</th>
+      <td><%= @user.email %></td>
+    </tr>
+    <% if @user.customer %>
+      <tr>
+        <th scope="row">Customer</th>
+        <td><%= @user.customer_name %></td>
+      </tr>
+    <% end %>
+    <% if current_user.admin? %>
+      <tr>
+        <th scope="row">Sign in count</th>
+        <td><%= @user.sign_in_count %></td>
+      </tr>
+      <tr>
+        <th scope="row">Last signed in</th>
+        <td><%= @user.last_sign_in_at %></td>
+      </tr>
+      <tr>
+        <th scope="row">Last sign in IP address</th>
+        <td><%= @user.last_sign_in_ip %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_user_path(@user), class: "btn btn-primary" %>

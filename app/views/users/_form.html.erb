@@ -1,0 +1,27 @@
+<%= simple_form_for(user) do |f| %>
+  <% if user.errors.any? %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <div>
+        Unable to save the user, please see errors below.
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.input :email, input_html: { class: "input-xlarge" } %>
+  <% if current_user.admin? && current_user != user %>
+    <%= f.association :customer, hint: "Leave blank to make user an administrator" %>
+  <% else %>
+    <div class="control-group">
+      <label class="control-label">Customer</label>
+      <div class="controls">
+        <span class="uneditable-input input-xlarge"><%= user.customer_name %></span>
+      </div>
+    </div>
+  <% end %>
+
+  <div>
+    <button type="submit" class="btn btn-primary"><%= button_text %></button>
+    <%= link_to 'Show details', user, class: "btn btn-link" if params[:action] == "edit" %>
+  </div>
+<% end %>

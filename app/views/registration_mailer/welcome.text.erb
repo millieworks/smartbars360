@@ -1,0 +1,16 @@
+<%= @greeting %>,
+
+You are receiving this email because you have been added as a user of the
+ONSERVER360 Smartbar Administration application.
+
+You can sign in to the application: <%= new_user_session_url(email: URI.escape(@email)) %>, using the following password:
+
+<%= @password %>
+
+Feel free to change this password to something more memorable.
+
+Best regards,
+
+
+
+The ONSERVER360 Team

@@ -1,0 +1,17 @@
+<div class="control-group smartbar-rule <%= f.object.persisted? ? 'persisted' : 'new' %>">
+  <div class="controls">
+    <div class="rule-type">
+      <%= f.label :rule_type_id, "Rule type" %>
+      <%= f.select(:rule_type_id, RuleType.sorted.collect { |rt| [ rt.name, rt.id ] }, { include_blank: true }, { class: "rule-type-select"}) %>
+    </div>
+    <div class="extra-controls" data-label-values="<%= RuleType.sorted.to_json(:only => [:id, :value_label, :default_value]) %>">
+      <div class="rule-value">
+        <%= f.input(:value, wrapper: nil) %>
+      </div>
+      <div class="rule-destroy">
+        <%= f.hidden_field :_destroy %>
+        <%= link_to "Remove", "#", class: "remove-fields" %>
+      </div>
+    </div>
+  </div>
+</div>

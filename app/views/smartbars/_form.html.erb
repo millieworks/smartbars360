@@ -1,0 +1,21 @@
+<%= simple_form_for([customer, smartbar]) do |f| %>
+  <% if smartbar.errors.any? %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <div>
+        Unable to save the smartbar, please see errors below.
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :customer_id, value: current_user.customer_id %>
+  <%= f.hidden_field :status, value: nil %>
+  <%= f.input :name %>
+  <%= f.input :url, label: "URL", hint: "Add a comma-separated list of urls and or wildcards" %>
+
+  <%= f.input :callback_url, label: "Callback URL", hint: "URL on your site Onserver360 will request when user takes action in smartbar" %>
+
+  <div>
+    <button type="submit" class="btn btn-primary">Next</button>
+  </div>
+<% end %>

@@ -1,0 +1,63 @@
+(function () {
+    var global = this,
+        $script,
+        jQuery = (typeof this.jQuery !== "undefined") ? this.jQuery : "jQuery",
+        $ = (typeof this.$ !== "undefined") ? this.$ : "$",
+        original_jQuery = jQuery,
+        original_$ = $,
+        script = document.createElement('script');
+
+    function bootstrap() {
+        function setUserCookie(id) {
+            jQuery.cookie('os360user', id, { expires: new Date(+new Date + <%= USER_COOKIE_DURATION_IN_SECONDS * 1000 %>) });
+            jQuery.cookie('os360visit', id, { expires: new Date(+new Date + <%= VISIT_COOKIE_DURATION_IN_SECONDS * 1000 %>) });
+            if (typeof jQuery.cookie('os360session') === "undefined") {
+                var now = new Date();
+                jQuery.cookie('os360session', now.getTime()); // current session start time
+            }
+        }
+
+        function init() {
+            var query = "?url=" + encodeURI(window.location.href),
+                userId = jQuery.cookie('os360user'),
+                visitId = jQuery.cookie('os360visit');
+            if (typeof userId !== "undefined") {
+                query += "&user_id=" + userId;
+            }
+            if (typeof visitId !== "undefined") {
+                query += "&visit_id=" + visitId;
+            }
+            query += "&api_key=" + "<%= @api_key %>";
+            jQuery.getScript("<%= @host_with_scheme_and_port %>/api/init.js" + query);
+        }
+
+        return {
+            init: init,
+            setUserCookie: setUserCookie
+        };
+    }
+
+    function main() {
+        jQuery = window.jQuery;
+        //$script = window.$script;
+        if (original_$ !== "$" && original_jQuery === "jQuery") {
+            jQuery.noConflict(); // $ already used on customer site but not jQuery, so play nicely
+        }
+        global.os360_bootstrap = bootstrap();
+        global.os360_bootstrap.init();
+    }
+
+    script.setAttribute("type", "text/javascript");
+    script.setAttribute("charset", "utf-8");
+    script.setAttribute("src", "<%= @host_with_scheme_and_port %>/assets/jquery-1.9.1.min.js");
+    if (script.readyState) {
+        script.onreadystatechange = function () { // For old versions of IE
+            if (this.readyState === 'complete' || this.readyState === 'loaded') {
+                main();
+            }
+        };
+    } else {
+        script.onload = main;
+    }
+    (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(script);
+}());

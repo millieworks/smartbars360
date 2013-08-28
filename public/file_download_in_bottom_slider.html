@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>File Download Template</title>
+<meta charset="utf-8">
+<style type="text/css">
+body {
+    margin: 0;
+    padding: 0;
+}
+</style>
+
+<style type="text/css">
+#os360-widget {
+    bottom: 0;
+    position: fixed;
+    right: 50px;
+}
+
+.os360-slider {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.os360-open,
+.os360-closed {
+    overflow: hidden;
+}
+
+.os360-tab a {
+    background-color: #363636;
+    border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) #363636;
+    border-style: solid;
+    border-width: 1px;
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    float: right;
+    display: block;
+    left: 0;
+    padding: 4px 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    top: 1px;
+    width: 80px;
+}
+
+.os360-tab a:hover {
+    background-color: #363636;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.os360-icon-plus-white {
+    background: url(/assets/plus.png) top left no-repeat;
+    display: inline-block;
+    height: 14px;
+    margin-right: 6px;
+    margin-top: 1px;
+    verical-align: text-top;
+    width: 14px;
+}
+
+.os360-icon-minus-white {
+    background: url(/assets/minus.png) top left no-repeat;
+    display: inline-block;
+    height: 14px;
+    margin-right: 6px;
+    margin-top: 1px;
+    verical-align: text-top;
+    width: 14px;
+}
+
+.os360-content {
+    background-color: #363636;
+    border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
+    border-style: solid;
+    border-width: 1px 1px 0;
+    clear: both;
+    color: #fff;
+
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+
+    padding: 10px 10px 15px;
+}
+
+.os360-content .os360-rubric {
+    margin-bottom: 5px;
+}
+
+.os360-content a {
+    color: #42C0FB;
+    text-decoration: none;
+}
+
+.os360-content a:hover {
+    text-decoration: underline;
+}
+
+.os360-content form {
+    margin-bottom: 0;
+}
+
+#os360-form input {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    display: inline-block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    height: 20px;
+    line-height: 20px;
+    margin: 0;
+    padding: 4px 6px;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    vertical-align: middle;
+}
+
+#os360-form input:-moz-placeholder {
+    color: #999;
+}
+
+.os360-input-large {
+    width: 210px
+}
+
+.os360-btn::-moz-focus-inner,
+#os360-form input::-moz-focus-inner {
+    border: 0 none;
+    padding: 0;
+}
+
+#os360-form input:focus:required:invalid {
+    border-color: #ee5f5b;
+    color: #b94a48;
+}
+
+#os360-form input:focus:required:invalid:focus {
+    border-color: #e9322d;
+    box-shadow: 0 0 6px #f8b9b7;
+}
+
+.os360-form-horizontal .os360-control-group {
+    margin-bottom: 10px;
+}
+
+.os360-form-horizontal .os360-control-label {
+    float: left;
+    padding-top: 5px;
+    text-align: right;
+    width: 80px;
+}
+
+.os360-form-horizontal .os360-controls {
+    margin-left: 90px;
+}
+
+.os360-btn {
+    border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: whitesmoke;
+    background-image: -webkit-linear-gradient(top, #fff, #e6e6e6);
+    background-image: linear-gradient(to bottom, white, #e6e6e6);
+    background-repeat: repeat-x;
+    border-image: none;
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    margin: 0;
+    padding: 4px 10px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+}
+</style>
+</head>
+<body>
+<div id="os360-widget">
+    <div class="os360-slider os360-slider-bottom">
+        <div class="os360-closed">
+            <div class="os360-tab">
+                <a href="#" id="os360-show-content">Open <i class="os360-icon-plus-white"></i></a>
+            </div>
+        </div>
+        <div class="os360-open">
+            <div class="os360-tab">
+                <a href="#" id="os360-hide-content">Close <i class="os360-icon-minus-white"></i></a>
+            </div>
+            <div class="os360-content">
+                <div class="os360-user-input">
+                    <p class="os360-rubric">Enter your Name and email address to see the download link</p>
+                    <form id="os360-form" class="os360-form-horizontal">
+                        <div class="os360-control-group">
+                            <label class="os360-control-label" for="os360-name">Name</label>
+                            <div class="os360-controls">
+                                <input type="text" name="name" id="os360-name" class="os360-input-large" required="required">
+                            </div>
+                        </div>
+                        <div class="os360-control-group">
+                            <label class="os360-control-label" for="os360-email">Email</label>
+                            <div class="os360-controls">
+                                <input type="text" name="email" id="os360-email" class="os360-input-large" required="required">
+                            </div>
+                        </div>
+                        <div class="os360-control-group">
+                            <div class="os360-controls">
+                                <button type="submit" class="os360-btn">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="os360-confirmation">
+                    <p>Thank you. The PDF can be downloaded from <a href="/catalog.pdf">here</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

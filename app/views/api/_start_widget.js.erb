@@ -1,0 +1,18 @@
+<% if @indicator == "JavascriptPageLoad" %>
+<%= @operator %>(function() {
+    startWidget();
+}, <%= @delay %>*60*1000);
+<% elsif @indicator == "JavascriptSessionStart" %>
+var now = new Date(),
+    difference = <%= @delay %>*60*1000,
+    result = parseInt(jQuery.cookie('os360session'), 10) + difference - now.getTime();
+if (result > 0) {
+    <%= @operator %>(function() {
+        startWidget();
+    }, result);
+} else {
+    startWidget();
+}
+<% else %>
+startWidget();
+<% end %>

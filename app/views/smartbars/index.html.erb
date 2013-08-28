@@ -1,0 +1,33 @@
+<h1>Smartbars</h1>
+<% unless @smartbars.empty? %>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Url</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @smartbars.each do |smartbar| %>
+      <tr>
+        <td><%= smartbar.name %></td>
+        <td><%= smartbar.url %></td>
+        <td>
+          <%= link_to 'Show', customer_smartbar_path(current_user.customer_id, smartbar), class: "btn" %>
+          <%= link_to 'Edit', edit_customer_smartbar_path(current_user.customer_id, smartbar), class: "btn" %>
+          <%= link_to 'Delete', smartbar, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <div class="alert alert-info">
+    <b>NOTE</b> If two smartbars have the same url and rules, only the highest one in the list above is sent to the browser.
+  </div>
+  <br />
+<% else %>
+  <p>No smartbars</p>
+<% end %>
+
+<%= link_to "New smartbar", new_customer_smartbar_path(current_user.customer_id), class: "btn btn-primary" %>

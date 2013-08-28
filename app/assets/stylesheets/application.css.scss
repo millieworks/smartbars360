@@ -1,0 +1,85 @@
+@import "bootstrap";
+body {
+  padding-top: 60px;
+}
+//@import "bootstrap-responsive";
+
+.admin-nav {
+  margin-bottom: 20px;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+#simple {
+  h2 {
+    background-color: whitesmoke;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 30px;
+    padding: 10px;
+  }
+
+  .form-horizontal {
+    .control-label {
+      width: 200px;
+    }
+
+    .controls {
+      margin-left: 220px;
+    }
+
+    .form-actions {
+      padding-left: 220px;
+    }
+  }
+}
+
+.form-horizontal {
+  label.checkbox {
+    text-align: left;
+  }
+}
+
+.help-block {
+  font-size: $baseFontSize - 2px;
+  margin-top: -10px
+}
+
+.collection_radio_buttons {
+  display: inline;
+}
+
+#smartbar-rules-grouping {
+  display: none;
+}
+
+.extra-controls .rule-value {
+  display: none;
+}
+
+.persisted .extra-controls .rule-value {
+  display: block;
+}
+
+.rule-type,
+.rule-value {
+  display: table-cell;
+  float: left;
+  margin-right: 20px;
+}
+
+.rule-destroy {
+  display: table-cell;
+  float: left;
+  padding-top: 30px;
+}
+
+.smartbar-rule {
+  float: left;
+  width: 100%;
+}
+
+.smartbar-rules-grouping {
+  display: none;
+}

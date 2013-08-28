@@ -1,0 +1,42 @@
+<% if @widget.minified_css %>
+var css = document.createElement('style');
+css.type = "text/css";
+css.innerHTML = "<%= @widget.minified_css %>";
+document.head.appendChild(css);
+<% end %>
+
+var widget,
+    widgetDiv,
+    confirmationContent,
+    userInputContent;
+
+function closeWidget(e) {
+    e.preventDefault();
+    var data = '';
+    
+    if (e.target.nodeName.toLowerCase() == "form") {
+        data = "&" + encodeURI(jQuery(e.target).serialize());
+        userInputContent.animate({
+            opacity: 0
+        }, 150, function() {
+            var h = userInputContent.height() + "px",
+                w = userInputContent.width() + "px";
+            userInputContent.remove();
+            confirmationContent.css({
+                minHeight: h,
+                minWidth: w
+            }).show();
+        });
+    } else {
+        widget.remove();
+    }
+    
+    jQuery.getScript("<%= @host_with_scheme_and_port %>/api/widget_action.js" + "?api_key=<%= @api_key %>&widget_id=<%= @widget.id %>&user_id=" + jQuery.cookie('os360user') + data);
+}
+
+function initFormContent() {
+    userInputContent = jQuery('.os360-user-input');
+    confirmationContent = jQuery('.os360-confirmation');
+    confirmationContent.hide();
+    jQuery('#os360-form').on('submit', closeWidget); // single form smartbars
+}

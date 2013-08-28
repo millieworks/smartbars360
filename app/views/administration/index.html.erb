@@ -1,0 +1,13 @@
+<% if current_user.role?(:customer_user) %>
+  <h3>Script tag</h3>
+  <%= CodeRay.scan(%Q(<script type="text/javascript" charset="utf-8" src="#{request.scheme}://#{request.host_with_port}/api/bootstrap.js?api_key=#{current_user.customer.api_key}"></script>), :html).div.html_safe %>
+
+  <% if @download_links.count > 0 %>
+    <h3>Download data collected in Smartbar forms</h3>
+    <ul>
+      <% @download_links.each do |link| %>
+        <li><%= link_to(link["name"], controller: :administration, action: :download, id: link["smartbar_id"]) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

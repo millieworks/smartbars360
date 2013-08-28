@@ -1,0 +1,39 @@
+<%= simple_form_for([customer, smartbar]) do |f| %>
+  <% if smartbar.errors.any? %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <div>
+        Unable to save the smartbar, please see errors below.
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :customer_id, value: current_user.customer_id %>
+  <%= f.hidden_field :status, value: "active" %>
+
+  <ul id="smartbar-tabs" class="nav nav-tabs">
+    <li class="active"><a href="#name" data-toggle="tab">Name and URLs</a></li>
+    <li><a href="#html" data-toggle="tab">HTML</a></li>
+    <li><a href="#css" data-toggle="tab">CSS</a></li>
+    <li><a href="#rules" data-toggle="tab">Rules</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="name">
+      <%= render 'name_and_url', f: f %>
+    </div>
+    <div class="tab-pane" id="html">
+      <%= render 'markup', f: f %>
+    </div>
+    <div class="tab-pane" id="css">
+      <%= render 'style', f: f %>
+    </div>
+    <div class="tab-pane" id="rules">
+      <%= render 'rules', f: f %>
+    </div>
+  </div>
+
+  <div>
+    <br><button type="submit" class="btn btn-primary">Save</button>
+  </div>
+<% end %>

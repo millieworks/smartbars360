@@ -1,0 +1,18 @@
+<h2>Customer</h2>
+<table class="table table-striped" xmlns="http://www.w3.org/1999/html">
+  <tbody>
+    <tr>
+      <th scope="row">Name</th>
+      <td><%= @customer.name %></td>
+    </tr>
+    <tr>
+      <th scope="row">API Key</th>
+      <td><%= @customer.api_key %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_customer_path(@customer), class: "btn btn-primary" %>
+
+<h3>Script tag</h3>
+<%= CodeRay.scan(%Q(<script type="text/javascript" src="#{request.scheme}://#{request.host_with_port}/api/bootstrap.js?api_key=#{@customer.api_key}"></script>), :html).div.html_safe %>

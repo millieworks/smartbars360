@@ -1,0 +1,7 @@
+<% if current_user == @user %>
+  <h1>Edit account</h1>
+<% else %>
+  <h1>Edit user</h1>
+<% end %>
+
+<%= render 'form', user: @user, button_text: "Save" %>

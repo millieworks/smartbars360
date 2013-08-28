@@ -1,0 +1,9 @@
+<div id="smartbar-rules-grouping">
+  <label>If <%= f.select(:rule_grouping, [["all", "and"], ["any", "or"]], {}, { class: "input-mini" }) %> of the following conditions are met:</label>
+</div>
+<%= f.fields_for :rules do |rule| %>
+  <%= render 'smartbars/rule_fields', f: rule %>
+<% end %>
+<div style="clear:both;">
+  <%= link_to_add_fields "Add rule", f, :rules %>
+</div>

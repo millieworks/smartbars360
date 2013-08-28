@@ -1,0 +1,16 @@
+<%= f.input :html, label: "HTML", :input_html => { :class => "input-xxlarge" } %>
+
+<div class="control-group string required">
+  <span class="string required control-label">Positioning element</span>
+  <label class="radio"><%= f.radio_button :position_element, "body" %>body</label>
+  <label class="radio"><%= f.radio_button :position_element, "", id: "smartbar_position_element_other"  %>other</label>
+  <div id="specified-smartbar-position-element">
+    <%= f.input :position_element, label: "please specify" %>
+  </div>
+</div>
+
+<div class="control-group boolean optional">
+  <span class="boolean optional control-label">Attach to positioning element</span>
+  <label class="radio"><%= f.radio_button :position_prepend, true %>by prepending</label>
+  <label class="radio"><%= f.radio_button :position_prepend, false %>by appending</label>
+</div>

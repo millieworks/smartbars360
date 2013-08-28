@@ -1,0 +1,25 @@
+<%= simple_form_for @smartbar, url: wizard_path do |f| %>
+  <%= f.hidden_field :status, value: "markup" %>
+
+  <h2>Create from templates</h2>
+
+  <div class="control-group">
+    <label for="smartbar_format_template" class="control-label">Format</label>
+    <div class="controls">
+      <%= select_tag(:smartbar_format_template, options_from_collection_for_select(SmartbarFormatTemplate.all(order: "name ASC"), "id", "name"), include_blank: true) %>
+      <div class="help-block">(Optional)</div>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="smartbar_content_template" class="control-label">Content</label>
+    <div class="controls">
+      <%= select_tag(:smartbar_content_template, options_from_collection_for_select(SmartbarContentTemplate.all(order: "name ASC"), "id", "name"), include_blank: true) %>
+      <div class="help-block">(Optional)</div>
+    </div>
+  </div>
+
+  <div>
+    <button type="submit" class="btn btn-primary">Next</button>
+  </div>
+<% end %>

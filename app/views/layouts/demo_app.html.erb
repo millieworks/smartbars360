@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ONSERVER360 Demo Application</title>
+  <meta charset="utf-8">
+  <%= stylesheet_link_tag "demo_app", :media => "all" %>
+  <%= javascript_include_tag "demo_app" %>
+</head>
+<body>
+  <div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container">
+        <a href="#" class="brand">Demo Site</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li <%= 'class=active' if params[:action] == 'index' %>><a href="/demo_app">Home</a></li>
+            <li <%= 'class=active' if params[:action] == 'cookies' %>><a href="/demo_app/cookies">Cookies</a></li>
+            <li <%= 'class=active' if params[:action] == 'newsletter' %>><a href="/demo_app/newsletter">Newsletter</a></li>
+            <li <%= 'class=active' if params[:action] == 'download' %>><a href="/demo_app/download">Download</a></li>
+            <li <%= 'class=active' if params[:action] == 'invalid_api_key' %>><a href="/demo_app/invalid_api_key">Invalid API Key</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <%= yield %>
+    <div id="debug">
+      <h4>Tracked User</h4>
+      <p id="loading">Loading...</p>
+    </div>
+  </div>
+  <script type="text/javascript" src="<%= @host_with_scheme_and_port %>/api/bootstrap.js?api_key=<%= @api_key %>"></script>
+  <script>
+      $(document).ready(function() {
+          var api_key = "<%= @api_key %>",
+                  user_id = $.cookie('os360user');
+
+          function getData() {
+              $.getJSON('<%= @host_with_scheme_and_port %>/api/user_stats.json', { 'user_id' : user_id, 'api_key': api_key }, function(data) {
+                  var items = [];
+
+                  $.each(data, function(key, val) {
+                      items.push('<li>' + key + ' = ' + val + '</li>');
+                  });
+
+                  $('#loading').html($('<ul/>', {
+                      'class': 'my-new-list',
+                      html: items.join('')
+                  }));
+              });
+          }
+
+          setTimeout(getData, 5000);
+      });
+  </script>
+</body>
+</html>

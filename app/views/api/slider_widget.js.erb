@@ -1,0 +1,70 @@
+(function OS360SliderWidget() {
+    <%= render 'shared_widget_code' %>
+    
+    var widgetOpenDimension,
+        widgetClosedDimension,
+        openContent,
+        closedContent;
+    
+    function hideContent(e) {
+        if (typeof e !== "undefined") {
+            e.preventDefault();
+        }
+        openContent.animate({
+            <%= @dimension %>: 0
+        }, 150, function() {
+            closedContent.animate({
+                <%= @dimension %>: widgetClosedDimension
+            }, 100);
+        });
+    }
+    
+    function showContent(e) {
+        if (typeof e !== "undefined") {
+            e.preventDefault();
+        }
+        closedContent.animate({
+            <%= @dimension %>: 0
+        }, 150, function() {
+            openContent.animate({
+                <%= @dimension %>: widgetOpenDimension
+            }, 100);
+        });
+        // Workaround for different heights between input and confirmation after completing
+        // a form (Chrome, IE9, Opera)
+        jQuery('.os360-content').css('height', jQuery('.os360-content').height() + 'px');
+    }
+    
+    function startWidget() {
+        if (!document.getElementById("os360-widget")) {
+            widgetDiv = document.createElement('div');
+            widgetDiv.id = "os360-widget";
+            <%= @position.html_safe %>
+            widget = jQuery('#os360-widget');
+            widget.css('visibility', 'hidden');
+        
+            widgetDiv.innerHTML = '<%= @widget.minified_html.html_safe %>';
+        
+            initFormContent();
+        
+            openContent = jQuery('.os360-open');
+            closedContent = jQuery('.os360-closed');
+            widgetOpenDimension = openContent.<%= @dimension %>() +"px";
+            widgetClosedDimension = closedContent.<%= @dimension %>() + "px";
+            
+            openContent.<%= @dimension %>(0);
+            closedContent.<%= @dimension %>(0);
+            jQuery('#os360-widget').css('visibility', 'visible');
+
+            showContent(); // or hideContent(); TODO: add a setting
+            //hideContent();
+        
+            // Event handlers
+            jQuery('#os360-close').on('click', closeWidget); // close button for simple smartbars
+            jQuery('#os360-hide-content').on('click', hideContent); // slider smartbars
+            jQuery('#os360-show-content').on('click', showContent); // slider smartbars
+        }
+    }
+    
+    <%= render 'start_widget' %>
+})();

@@ -1,0 +1,57 @@
+<h2>Smartbar</h2>
+
+<ul id="smartbar-tabs" class="nav nav-tabs">
+  <li class="active"><a href="#name" data-toggle="tab">Name and URLs</a></li>
+  <li><a href="#html" data-toggle="tab">HTML</a></li>
+  <li><a href="#css" data-toggle="tab">CSS</a></li>
+  <li><a href="#rules" data-toggle="tab">Rules</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="name">
+    <table class="table table-striped" xmlns="http://www.w3.org/1999/html">
+      <tbody>
+        <tr>
+          <th scope="row">Name</th>
+          <td><%= @smartbar.name %></td>
+        </tr>
+        <tr>
+          <th scope="row">URL</th>
+          <td><%= @smartbar.url %></td>
+        </tr>
+        <tr>
+          <th scope="row">Callback URL</th>
+          <td><%= @smartbar.callback_url %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane" id="html">
+    <%= @smartbar.html %>
+    <b>Positioning element</b>: <%= @smartbar.position_element %> (<%= @smartbar.position_prepend ? "by prepending" : "by appending" %>)
+  </div>
+  <div class="tab-pane" id="css">
+    <%= @smartbar.css %>
+  </div>
+  <div class="tab-pane" id="rules">
+    <%- if @smartbar.rules.empty? %>
+      <b>No rules</b>
+    <%- else %>
+      <%= "<p>The following rule applies:</p>".html_safe if @smartbar.rules.count == 1 %>
+      <%= "<p>Smartbar is shown if #{@smartbar.rule_grouping == "and" ? 'all' : 'any'} of the following rules are met:</p>".html_safe if @smartbar.rules.count > 1 %>
+      <table class="table table-striped" xmlns="http://www.w3.org/1999/html">
+        <tbody>
+          <%- @smartbar.rules.each do |rule| %>
+            <tr>
+              <td>
+                <%= rule.display_format %>
+              </td>
+            </tr>
+          <%- end %>
+        </tbody>
+      </table>
+    <%- end %>
+  </div>
+</div>
+
+<br><%= link_to 'Edit', edit_customer_smartbar_path(current_user.customer_id, @smartbar), class: "btn btn-primary" %>

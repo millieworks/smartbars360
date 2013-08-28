@@ -1,0 +1,7 @@
+window.os360_bootstrap.setUserCookie("<%= @tracked_user.public_user_id %>");
+<%- if @widget_id %>
+var script = document.createElement('script');
+script.setAttribute("charset", "utf-8");
+script.setAttribute('src', "<%= @host_with_scheme_and_port %>/api/widget.js?api_key=<%= @api_key %>&widget_id=<%= @widget_id %>");
+document.head.appendChild(script);
+<%- end %>

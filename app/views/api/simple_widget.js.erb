@@ -1,0 +1,26 @@
+(function OS360SimpleWidget() {
+    var widget,
+        widgetDiv,
+        confirmationContent,
+        userInputContent;
+
+    <%= render 'shared_widget_code' %>
+        
+    function startWidget() {
+        if (!document.getElementById("os360-widget")) {
+            widgetDiv = document.createElement('div');
+            widgetDiv.id = "os360-widget";
+        
+            <%= @position.html_safe %>
+            widgetDiv.innerHTML = '<%= @widget.minified_html.html_safe %>';
+
+            widget = jQuery('#os360-widget');
+            initFormContent();
+
+            // Event handlers
+            jQuery('#os360-close').on('click', closeWidget); // close button for simple smartbars
+        }
+    }
+    
+    <%= render 'start_widget' %>
+})();

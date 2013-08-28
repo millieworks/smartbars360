@@ -1,0 +1,7 @@
+<%= simple_form_for @smartbar, url: wizard_path do |f| %>
+  <%= f.hidden_field :status, value: "markup" %>
+  <%= render 'smartbars/style', f: f %>
+  <div>
+    <button type="submit" class="btn btn-primary">Next</button>
+  </div>
+<% end %>
